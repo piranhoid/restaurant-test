@@ -1,0 +1,55 @@
+services:
+  php-client:
+    build:
+      context: ./client
+    depends_on:
+      - database-client
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+
+    volumes:
+      - ./client:/var/www
+
+  php-restaurant:
+    build:
+      context: ./restaurant
+    depends_on:
+      - database-restaurant
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+
+    volumes:
+      - ./restaurant:/var/www
+
+  nginx:
+    build:
+      context: ./docker/nginx
+    volumes:
+      - ./client:/var/client
+      - ./restaurant:/var/restaurant
+    ports:
+      - "80:80"
+
+  database-client:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      - MYSQL_DATABASE=client
+      - MYSQL_USER=client
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+
+  database-restaurant:
+    image: mysql:5.7
+    ports:
+      - 3307:3306
+    restart: always
+    environment:
+      - MYSQL_DATABASE=restaurant
+      - MYSQL_USER=restaurant
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
