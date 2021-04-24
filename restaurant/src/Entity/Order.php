@@ -21,7 +21,11 @@ class Order
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="order")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Product")
+     * @ORM\JoinTable(name="order_product",
+     *      joinColumns={@ORM\JoinColumn(name="order_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")}
+     *      )
      */
     private $products;
 
@@ -47,7 +51,6 @@ class Order
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->setOrder($this);
         }
 
         return $this;
@@ -55,12 +58,7 @@ class Order
 
     public function removeProduct(Product $product): self
     {
-        if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getOrder() === $this) {
-                $product->setOrder(null);
-            }
-        }
+        $this->products->removeElement($product);
 
         return $this;
     }

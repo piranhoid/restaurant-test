@@ -20,37 +20,19 @@ class Product
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant")
-     * @Groups({"show_product"})
+     * @ORM\Column(type="string")
+     * @Groups({"show_restaurant"})
      */
-    private $restaurant;
+    private $name;
 
     /**
      * @ORM\Column(type="string")
      */
     private $ref;
 
-    /**
-     * @ORM\Column(type="string")
-     * @Groups({"show_restaurant"})
-     */
-    private $name;
-
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getRestaurant(): ?Restaurant
-    {
-        return $this->restaurant;
-    }
-
-    public function setRestaurant(?Restaurant $restaurant): self
-    {
-        $this->restaurant = $restaurant;
-
-        return $this;
     }
 
     public function getName(): ?string

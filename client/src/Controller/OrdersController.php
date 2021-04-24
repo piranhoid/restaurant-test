@@ -1,44 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Repository\OrderRepository;
-use App\Repository\ProductRepository;
+use App\Message\SendOrder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class OrdersController extends AbstractController
 {
-    /** @var OrderRepository */
-    private $orderRepository;
-
-    /** @var ProductRepository */
-    private $productRepository;
-
-    public function __construct(OrderRepository $orderRepository, ProductRepository $productRepository)
-    {
-        $this->orderRepository = $orderRepository;
-        $this->productRepository = $productRepository;
-    }
-
     /**
-     * @Route("/api/orders/", name="add_order", methods={"POST"})
+     * @Route("/api/orders", name="add_order", methods={"POST"})
      */
-    public function add(Request $request): Response
+    public function add(Request $request, MessageBusInterface $bus): JsonResponse
     {
-        $data = json_decode($request->getContent(), true);
+        $bus->dispatch(new SendOrder($request->getContent()));
 
-        $productsId = $data['products'];
-
-        // Todo must handle wrong input
-        $products = $this->productRepository->findBy([
-            'id' => $productsId
-        ]);
-
-        $this->orderRepository->saveOrder($products);
-
-        return new Response(['status' => 'Order created!'], Response::HTTP_CREATED);
+        return new JsonResponse(['status' => 'Order dispatched !'], Response::HTTP_CREATED);
     }
 }

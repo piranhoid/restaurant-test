@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,11 +20,11 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/register", methods={"POST"}, name="register")
+     * @Route("/api/register", methods={"POST"}, name="register")
      * @param Request $request
      * @return Response
      */
-    public function register(Request $request): Response
+    public function register(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -36,6 +37,6 @@ class AuthController extends AbstractController
 
         $this->userRepository->saveUser($email, $plainPassword);
 
-        return new Response(['status' => 'User created!'], Response::HTTP_CREATED);
+        return new JsonResponse(['status' => 'User created!'], Response::HTTP_CREATED);
     }
 }
