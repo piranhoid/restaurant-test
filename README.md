@@ -13,6 +13,10 @@ Change your host file
 
 `docker-compose exec php-client sh`
 
+`composer install`
+
+`./bin/console lexik:jwt:generate-keypair`
+
 `./bin/console doctrine:schema:update --force`
 
 `./bin/console doctrine:fixtures:load`
@@ -20,6 +24,8 @@ Change your host file
 ## Setup Restaurant
 
 `docker-compose exec php-restaurant sh`
+
+`composer install`
 
 `./bin/console doctrine:schema:update --force`
 
