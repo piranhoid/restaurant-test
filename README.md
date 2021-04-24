@@ -33,7 +33,7 @@ Change your host file
 
 ## PUBLIC API
 
-`GET http://client.local/api/login_check`
+`POST http://client.local/api/login_check`
 
 Payload : 
 
