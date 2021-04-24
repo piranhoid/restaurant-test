@@ -9,7 +9,7 @@ services:
       - APP_SECRET=${APP_SECRET}
 
     volumes:
-      - ./client:/var/www
+      - ./client:/var/www/client
 
   php-restaurant:
     build:
@@ -21,14 +21,14 @@ services:
       - APP_SECRET=${APP_SECRET}
 
     volumes:
-      - ./restaurant:/var/www
+      - ./restaurant:/var/www/restaurant
 
   nginx:
     build:
       context: ./docker/nginx
     volumes:
-      - ./client:/var/client
-      - ./restaurant:/var/restaurant
+      - ./client:/var/www/client
+      - ./restaurant:/var/www/restaurant
     ports:
       - "80:80"
 
@@ -53,3 +53,9 @@ services:
       - MYSQL_USER=restaurant
       - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=root
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672

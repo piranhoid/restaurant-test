@@ -130,6 +130,15 @@
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "2.2.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "5.2.2"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.4.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -215,6 +224,9 @@
             ".env"
         ]
     },
+    "symfony/form": {
+        "version": "v4.4.21"
+    },
     "symfony/framework-bundle": {
         "version": "4.4",
         "recipe": {
@@ -248,6 +260,9 @@
     "symfony/inflector": {
         "version": "v4.4.21"
     },
+    "symfony/intl": {
+        "version": "v4.4.20"
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -257,11 +272,29 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "e9a414b113ceadbf4e52abe37bf8f1b443f06ccb"
+        },
+        "files": [
+            "config/packages/messenger.yaml"
+        ]
+    },
     "symfony/mime": {
         "version": "v4.4.21"
     },
+    "symfony/options-resolver": {
+        "version": "v4.4.20"
+    },
     "symfony/orm-pack": {
         "version": "v2.1.0"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.22.1"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.22.1"
@@ -282,6 +315,9 @@
         "version": "v1.22.1"
     },
     "symfony/property-access": {
+        "version": "v4.4.20"
+    },
+    "symfony/property-info": {
         "version": "v4.4.20"
     },
     "symfony/proxy-manager-bridge": {
@@ -325,6 +361,12 @@
     "symfony/security-http": {
         "version": "v4.4.21"
     },
+    "symfony/serializer": {
+        "version": "v4.4.20"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.4"
+    },
     "symfony/service-contracts": {
         "version": "v1.1.9"
     },
@@ -339,5 +381,8 @@
     },
     "symfony/yaml": {
         "version": "v4.4.21"
+    },
+    "webmozart/assert": {
+        "version": "1.10.0"
     }
 }
